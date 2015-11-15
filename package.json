@@ -1,0 +1,55 @@
+{
+  "name": "utility-usage-monitor",
+  "version": "0.0.0",
+  "description": "A utility usage monitoring application",
+  "keywords": [
+    "awareness",
+    "charts",
+    "cosem",
+    "electricity",
+    "energy",
+    "gas",
+    "dashboard",
+    "datalogger",
+    "datalogging",
+    "domotic",
+    "domotics",
+    "home-automation",
+    "live",
+    "measurement",
+    "meter",
+    "monitor",
+    "monitoring",
+    "obis",
+    "p1",
+    "p1-port",
+    "power",
+    "real-time",
+    "smart",
+    "statistics",
+    "usage",
+    "utility",
+    "water"
+  ],
+  "license": "GPL-2.0",
+  "author": {
+    "name": "Erik van der Kolk",
+    "email": "developer@smerik.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smerik/utility-usage-monitor"
+  },
+  "bugs": {
+    "url": "https://github.com/smerik/utility-usage-monitor/issues"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "moment": "2.10.6",
+    "serialport": "2.0.2",
+    "split2": "1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "1.9.0"
+  }
+}
