@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    // best practices
+    "eqeqeq": 2,
+
+    // stylistic issues
+    "eol-last": 2,
+    "no-multiple-empty-lines": [2, {"max": 2, "maxEOF": 1}],
+    "no-nested-ternary": 2,
+    "no-trailing-spaces": 2,
+    "padded-blocks": [2, "never"],
+    "quotes": [2, "single", "avoid-escape"]
+  }
+}
