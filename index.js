@@ -19,6 +19,7 @@ var util = require('util'),
   split = require('split2'),
   P1Telegram = require('./P1Telegram'),
   FormatToJson = require('./FormatToJson'),
+  WriteToDatabase = require('./WriteToDatabase'),
   SerialPort = require('serialport').SerialPort, // localize object constructor
   serialPath = process.argv[2] || '/dev/ttyUSB0';
 
@@ -43,6 +44,7 @@ sp.open(function (error) {
     sp
       .pipe(split('\r\n'))
       .pipe(new P1Telegram())
+      .pipe(new WriteToDatabase())
       .pipe(new FormatToJson())
       .pipe(process.stdout)
     ;
