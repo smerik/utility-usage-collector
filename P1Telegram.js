@@ -144,7 +144,7 @@ P1Telegram.prototype._transform = function (line, encoding, done) {
     if (line[0] === '/') {
       this.transformAllowed = true;
       this.telegram = {
-        receivedAt: moment.valueOf(),
+        receivedAt: moment().valueOf(),
         // manufacturer ids
         // ISk = 'Iskra'
         // KFM = 'Kaifa'
