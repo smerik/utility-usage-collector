@@ -3,7 +3,6 @@ An application for logging and monitoring the utility usage.
 
 ## Work in progress
 At this moment the application is only able to log the received data to a database.
-The measurements schema will probably change in a short term.
 
 The frontend for showing the statistics will be implemented later.
 

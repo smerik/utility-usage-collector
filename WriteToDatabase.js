@@ -34,10 +34,14 @@ function WriteToDatabase () {
 
 WriteToDatabase.prototype._transform = function (line, encoding, done) {
   var series = {
-    electricity_actual_power: getElectricityActualPower(line),
+    electricity_actual_power_delivered_by_client: getElectricityActualPowerDeliveredByClient(line),
+    electricity_actual_power_delivered_to_client: getElectricityActualPowerDeliveredToClient(line),
     electricity_actual_switch_position: getElectricityActualSwitchPosition(line),
     electricity_actual_threshold: getElectricityActualThreshold(line),
-    electricity_meter_reading: getElectricityMeterReadings(line),
+    electricity_meter_reading_delivered_by_client_low_tariff: getElectricityMeterReadingsDeliveredByClientLowTariff(line),
+    electricity_meter_reading_delivered_by_client_normal_tariff: getElectricityMeterReadingsDeliveredByClientNormalTariff(line),
+    electricity_meter_reading_delivered_to_client_low_tariff: getElectricityMeterReadingsDeliveredToClientNormalTariff(line),
+    electricity_meter_reading_delivered_to_client_normal_tariff: getElectricityMeterReadingsDeliveredToClientLowTariff(line),
     electricity_tariff_indicator: getElectricityTariffIndicator(line),
     electricity_text_message: getElectricityTextMessage(line),
     gas_meter_reading: getGasMeterReading(line),
@@ -54,7 +58,7 @@ WriteToDatabase.prototype._transform = function (line, encoding, done) {
 };
 
 
-function getElectricityActualPower(line) {
+function getElectricityActualPowerDeliveredByClient(line) {
   return [
     [
       {
@@ -62,18 +66,21 @@ function getElectricityActualPower(line) {
         time: line.receivedAt
       },
       {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'by_client'
+        equipmentId: line.channels[0].equipmentId
       }
-    ],
+    ]
+  ];
+}
+
+function getElectricityActualPowerDeliveredToClient(line) {
+  return [
     [
       {
         value: line.channels[0].actualPowerDeliveredToClient.value,
         time: line.receivedAt
       },
       {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'to_client'
+        equipmentId: line.channels[0].equipmentId
       }
     ]
   ];
@@ -107,7 +114,7 @@ function getElectricityActualThreshold(line) {
   ];
 }
 
-function getElectricityMeterReadings(line) {
+function getElectricityMeterReadingsDeliveredToClientNormalTariff(line) {
   return [
     [
       {
@@ -115,43 +122,49 @@ function getElectricityMeterReadings(line) {
         time: line.receivedAt
       },
       {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'to_client',
-        tariff: 'normal'
+        equipmentId: line.channels[0].equipmentId
       }
-    ],
-    [
-      {
-        value: line.channels[0].meterReadingDeliveredToClientLowTariff.value,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'to_client',
-        tariff: 'low'
-      }
-    ],
+    ]
+  ];
+}
+
+function getElectricityMeterReadingsDeliveredToClientLowTariff(line) {
+    return [
+      [
+        {
+          value: line.channels[0].meterReadingDeliveredToClientLowTariff.value,
+          time: line.receivedAt
+        },
+        {
+          equipmentId: line.channels[0].equipmentId
+        }
+      ]
+    ];
+}
+
+function getElectricityMeterReadingsDeliveredByClientNormalTariff(line) {
+  return [
     [
       {
         value: line.channels[0].meterReadingDeliveredByClientNormalTariff.value,
         time: line.receivedAt
       },
       {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'by_client',
-        tariff: 'normal'
+        equipmentId: line.channels[0].equipmentId
       }
+    ]
+  ];
+}
 
-    ],
+function getElectricityMeterReadingsDeliveredByClientLowTariff(line) {
+  return [
     [
       {
         value: line.channels[0].meterReadingDeliveredByClientLowTariff.value,
         time: line.receivedAt
       },
       {
-        equipmentId: line.channels[0].equipmentId,
-        deliveryType: 'by_client',
-        tariff: 'low'
+        equipmentId: line.channels[0].equipmentId
       }
     ]
   ];
