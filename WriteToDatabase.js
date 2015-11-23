@@ -58,7 +58,7 @@ function getElectricityActualPower(line) {
   return [
     [
       {
-        value: line.channels[0].actualPowerReceived.value,
+        value: line.channels[0].actualPowerDeliveredByClient.value,
         time: line.receivedAt
       },
       {
@@ -68,7 +68,7 @@ function getElectricityActualPower(line) {
     ],
     [
       {
-        value: line.channels[0].actualPowerDelivered.value,
+        value: line.channels[0].actualPowerDeliveredToClient.value,
         time: line.receivedAt
       },
       {
@@ -111,7 +111,7 @@ function getElectricityMeterReadings(line) {
   return [
     [
       {
-        value: line.channels[0].meterReadingDeliveredNormal.value,
+        value: line.channels[0].meterReadingDeliveredToClientNormalTariff.value,
         time: line.receivedAt
       },
       {
@@ -122,7 +122,7 @@ function getElectricityMeterReadings(line) {
     ],
     [
       {
-        value: line.channels[0].meterReadingDeliveredLow.value,
+        value: line.channels[0].meterReadingDeliveredToClientLowTariff.value,
         time: line.receivedAt
       },
       {
@@ -133,7 +133,7 @@ function getElectricityMeterReadings(line) {
     ],
     [
       {
-        value: line.channels[0].meterReadingReceivedNormal.value,
+        value: line.channels[0].meterReadingDeliveredByClientNormalTariff.value,
         time: line.receivedAt
       },
       {
@@ -145,7 +145,7 @@ function getElectricityMeterReadings(line) {
     ],
     [
       {
-        value: line.channels[0].meterReadingReceivedLow.value,
+        value: line.channels[0].meterReadingDeliveredByClientLowTariff.value,
         time: line.receivedAt
       },
       {

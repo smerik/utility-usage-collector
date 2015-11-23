@@ -111,22 +111,22 @@ P1Telegram.prototype._transform = function (line, encoding, done) {
         } else {
           switch (key) {
             case '1.7.0':
-              channelData.actualPowerDelivered = parseCosem(cosemValues[1]);
+              channelData.actualPowerDeliveredToClient = parseCosem(cosemValues[1]);
               break;
             case '1.8.1':
-              channelData.meterReadingDeliveredNormal = parseCosem(cosemValues[1]);
+              channelData.meterReadingDeliveredToClientNormalTariff = parseCosem(cosemValues[1]);
               break;
             case '1.8.2':
-              channelData.meterReadingDeliveredLow = parseCosem(cosemValues[1]);
+              channelData.meterReadingDeliveredToClientLowTariff = parseCosem(cosemValues[1]);
               break;
             case '2.7.0':
-              channelData.actualPowerReceived = parseCosem(cosemValues[1]);
+              channelData.actualPowerDeliveredByClient = parseCosem(cosemValues[1]);
               break;
             case '2.8.1':
-              channelData.meterReadingReceivedNormal = parseCosem(cosemValues[1]);
+              channelData.meterReadingDeliveredByClientNormalTariff = parseCosem(cosemValues[1]);
               break;
             case '2.8.2':
-              channelData.meterReadingReceivedLow = parseCosem(cosemValues[1]);
+              channelData.meterReadingDeliveredByClientLowTariff = parseCosem(cosemValues[1]);
               break;
             default:
               util.log('unknown obis id:', obis);
