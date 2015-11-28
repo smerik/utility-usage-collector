@@ -68,18 +68,15 @@ P1Telegram.prototype._transform = function (line, encoding, done) {
               channelData.deviceType = +cosemValues[1];
               break;
             case '24.3.0':
-              channelData.lastHourlyMeterReading = {
-                readAtHumanLocal: moment(cosemValues[1], 'YYMMDDHHmmss').format(),
-                readAt: moment(cosemValues[1], 'YYMMDDHHmmss').valueOf(),
-                something1: cosemValues[3],
-                something2: cosemValues[5],
-                something3: cosemValues[7],
-                obisX: cosemValues[9],
-                unit: cosemValues[11]
-              };
+              channelData.readAtHumanLocal = moment(cosemValues[1], 'YYMMDDHHmmss').format();
+              channelData.readAt = moment(cosemValues[1], 'YYMMDDHHmmss').valueOf();
+              channelData.unknownData1 = cosemValues[3];
+              channelData.unknownData2 = cosemValues[5];
+              channelData.unknownData3 = cosemValues[7];
+              channelData.obisX = cosemValues[9];
+              channelData.meterReadingDeliveredToClient = { unit: cosemValues[11] };
               break;
             case '24.4.0':
-              // TODO: move this into lastHourlyMeterReading?
               channelData.valvePosition = +cosemValues[1];
               break;
             case '96.1.0':
@@ -135,7 +132,7 @@ P1Telegram.prototype._transform = function (line, encoding, done) {
         }
         this.telegram.channels[channel] = channelData;
       } else if (cosem) {
-        this.telegram.channels[1].lastHourlyMeterReading.value = +cosemValues[1];
+        this.telegram.channels[1].meterReadingDeliveredToClient.value = +cosemValues[1];
       }
 
       util.log('obis: %s, cosem: %s, cvalues: %s', obis, cosem, cosemValues);

@@ -203,8 +203,8 @@ function getGasMeterReading(line) {
   return [
     [
       {
-        value: line.channels[1].lastHourlyMeterReading.value,
-        time: line.channels[1].lastHourlyMeterReading.readAt
+        value: line.channels[1].meterReadingDeliveredToClient.value,
+        time: line.channels[1].readAt
       },
       {
         equipmentId: line.channels[1].equipmentId
@@ -217,8 +217,8 @@ function getGasUnknownData1(line) {
   return [
     [
       {
-        value: line.channels[1].lastHourlyMeterReading.something1,
-        time: line.channels[1].lastHourlyMeterReading.readAt
+        value: line.channels[1].unknownData1,
+        time: line.channels[1].readAt
       },
       {
         equipmentId: line.channels[1].equipmentId
@@ -231,8 +231,8 @@ function getGasUnknownData2(line) {
   return [
     [
       {
-        value: line.channels[1].lastHourlyMeterReading.something2,
-        time: line.channels[1].lastHourlyMeterReading.readAt
+        value: line.channels[1].unknownData2,
+        time: line.channels[1].readAt
       },
       {
         equipmentId: line.channels[1].equipmentId
@@ -245,8 +245,8 @@ function getGasUnknownData3(line) {
   return [
     [
       {
-        value: line.channels[1].lastHourlyMeterReading.something3,
-        time: line.channels[1].lastHourlyMeterReading.readAt
+        value: line.channels[1].unknownData3,
+        time: line.channels[1].readAt
       },
       {
         equipmentId: line.channels[1].equipmentId
@@ -260,7 +260,7 @@ function getGasValvePosition(line) {
     [
       {
         value: line.channels[1].valvePosition,
-        time: line.channels[1].lastHourlyMeterReading.readAt
+        time: line.channels[1].readAt
       },
       {
         equipmentId: line.channels[1].equipmentId
