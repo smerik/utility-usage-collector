@@ -21,6 +21,8 @@ var Transform = require('stream').Transform;
 var util = require('util');
 util.inherits(WriteToDatabase, Transform);
 
+var _ = require('lodash');
+
 var influx = require('influx');
 var client = influx({
   host: 'localhost',
@@ -33,23 +35,11 @@ function WriteToDatabase () {
 }
 
 WriteToDatabase.prototype._transform = function (line, encoding, done) {
-  var series = {
-    electricity_actual_power_delivered_by_client: getElectricityActualPowerDeliveredByClient(line),
-    electricity_actual_power_delivered_to_client: getElectricityActualPowerDeliveredToClient(line),
-    electricity_actual_switch_position: getElectricityActualSwitchPosition(line),
-    electricity_actual_threshold: getElectricityActualThreshold(line),
-    electricity_meter_reading_delivered_by_client_low_tariff: getElectricityMeterReadingsDeliveredByClientLowTariff(line),
-    electricity_meter_reading_delivered_by_client_normal_tariff: getElectricityMeterReadingsDeliveredByClientNormalTariff(line),
-    electricity_meter_reading_delivered_to_client_low_tariff: getElectricityMeterReadingsDeliveredToClientNormalTariff(line),
-    electricity_meter_reading_delivered_to_client_normal_tariff: getElectricityMeterReadingsDeliveredToClientLowTariff(line),
-    electricity_tariff_indicator: getElectricityTariffIndicator(line),
-    electricity_text_message: getElectricityTextMessage(line),
-    gas_meter_reading: getGasMeterReading(line),
-    gas_unknown_data_1: getGasUnknownData1(line),
-    gas_unknown_data_2: getGasUnknownData2(line),
-    gas_unknown_data_3: getGasUnknownData3(line),
-    gas_valve_position: getGasValvePosition(line)
-  };
+  var series = {};
+
+  var electricitySeries = getElectricitySeries(line);
+  var gasSeries = getGasSeries(line)
+  _.merge(series, electricitySeries, gasSeries);
 
   client.writeSeries(series, finishedWrite);
 
@@ -57,216 +47,68 @@ WriteToDatabase.prototype._transform = function (line, encoding, done) {
   done();
 };
 
+function getElectricitySeries(line) {
+  var timestamp = line.receivedAt;
 
-function getElectricityActualPowerDeliveredByClient(line) {
+  return {
+    electricity_actual_power_delivered_by_client: getMeasurementByValue('actualPowerDeliveredByClient', timestamp, line, 0),
+    electricity_actual_power_delivered_to_client: getMeasurementByValue('actualPowerDeliveredToClient', timestamp, line, 0),
+    electricity_actual_switch_position: getMeasurement('actualSwitchPosition', timestamp, line, 0),
+    electricity_actual_threshold: getMeasurementByValue('actualThreshold', timestamp, line, 0),
+    electricity_meter_reading_delivered_by_client_low_tariff: getMeasurementByValue('meterReadingDeliveredByClientLowTariff', timestamp, line, 0),
+    electricity_meter_reading_delivered_by_client_normal_tariff: getMeasurementByValue('meterReadingDeliveredByClientNormalTariff', timestamp, line, 0),
+    electricity_meter_reading_delivered_to_client_low_tariff: getMeasurementByValue('meterReadingDeliveredToClientLowTariff', timestamp, line, 0),
+    electricity_meter_reading_delivered_to_client_normal_tariff: getMeasurementByValue('meterReadingDeliveredToClientNormalTariff', timestamp, line, 0),
+    electricity_tariff_indicator: getMeasurement('tariffIndicator', timestamp, line, 0),
+    electricity_text_message: getElectricityTextMessage(timestamp, line, 0)
+  };
+}
+
+function getGasSeries(line) {
+  var timestamp = line.channels[1].readAt;
+
+  return {
+    gas_meter_reading: getMeasurementByValue('meterReadingDeliveredToClient', timestamp, line, 1),
+    gas_unknown_data_1: getMeasurement('unknownData1', timestamp, line, 1),
+    gas_unknown_data_2: getMeasurement('unknownData2', timestamp, line, 1),
+    gas_unknown_data_3: getMeasurement('unknownData3', timestamp, line, 1),
+    gas_valve_position: getMeasurement('valvePosition', timestamp, line, 1)
+  };
+}
+
+function getMeasurementByValue(measurement, timestamp, line, channelNr) {
   return [
     [
       {
-        value: line.channels[0].actualPowerDeliveredByClient.value,
-        time: line.receivedAt
+        value: line.channels[channelNr][measurement].value,
+        time: timestamp
       },
       {
-        equipmentId: line.channels[0].equipmentId
+        equipmentId: line.channels[channelNr].equipmentId
       }
     ]
   ];
 }
 
-function getElectricityActualPowerDeliveredToClient(line) {
+function getMeasurement(measurement, timestamp, line, channelNr) {
   return [
     [
       {
-        value: line.channels[0].actualPowerDeliveredToClient.value,
-        time: line.receivedAt
+        value: line.channels[channelNr][measurement],
+        time: timestamp
       },
       {
-        equipmentId: line.channels[0].equipmentId
+        equipmentId: line.channels[channelNr].equipmentId
       }
     ]
-  ];
+  ]
 }
 
-function getElectricityActualSwitchPosition(line) {
-  return [
-    [
-      {
-        value: line.channels[0].actualSwitchPosition,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
+function getElectricityTextMessage(timestamp, line, channelNr) {
+  var result = getMeasurement('textMessage', timestamp, line, channelNr);
+  result[0][0].code = line.channels[channelNr].textMessageCodes;
 
-function getElectricityActualThreshold(line) {
-  return [
-    [
-      {
-        value: line.channels[0].actualThreshold.value,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getElectricityMeterReadingsDeliveredToClientNormalTariff(line) {
-  return [
-    [
-      {
-        value: line.channels[0].meterReadingDeliveredToClientNormalTariff.value,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getElectricityMeterReadingsDeliveredToClientLowTariff(line) {
-    return [
-      [
-        {
-          value: line.channels[0].meterReadingDeliveredToClientLowTariff.value,
-          time: line.receivedAt
-        },
-        {
-          equipmentId: line.channels[0].equipmentId
-        }
-      ]
-    ];
-}
-
-function getElectricityMeterReadingsDeliveredByClientNormalTariff(line) {
-  return [
-    [
-      {
-        value: line.channels[0].meterReadingDeliveredByClientNormalTariff.value,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getElectricityMeterReadingsDeliveredByClientLowTariff(line) {
-  return [
-    [
-      {
-        value: line.channels[0].meterReadingDeliveredByClientLowTariff.value,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getElectricityTariffIndicator(line) {
-  return [
-    [
-      {
-        value: line.channels[0].tariffIndicator,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getElectricityTextMessage(line) {
-  return [
-    [
-      {
-        value: line.channels[0].textMessage,
-        code: line.channels[0].textMessageCodes,
-        time: line.receivedAt
-      },
-      {
-        equipmentId: line.channels[0].equipmentId
-      }
-    ]
-  ];
-}
-
-function getGasMeterReading(line) {
-  return [
-    [
-      {
-        value: line.channels[1].meterReadingDeliveredToClient.value,
-        time: line.channels[1].readAt
-      },
-      {
-        equipmentId: line.channels[1].equipmentId
-      }
-    ]
-  ];
-}
-
-function getGasUnknownData1(line) {
-  return [
-    [
-      {
-        value: line.channels[1].unknownData1,
-        time: line.channels[1].readAt
-      },
-      {
-        equipmentId: line.channels[1].equipmentId
-      }
-    ]
-  ];
-}
-
-function getGasUnknownData2(line) {
-  return [
-    [
-      {
-        value: line.channels[1].unknownData2,
-        time: line.channels[1].readAt
-      },
-      {
-        equipmentId: line.channels[1].equipmentId
-      }
-    ]
-  ];
-}
-
-function getGasUnknownData3(line) {
-  return [
-    [
-      {
-        value: line.channels[1].unknownData3,
-        time: line.channels[1].readAt
-      },
-      {
-        equipmentId: line.channels[1].equipmentId
-      }
-    ]
-  ];
-}
-
-function getGasValvePosition(line) {
-  return [
-    [
-      {
-        value: line.channels[1].valvePosition,
-        time: line.channels[1].readAt
-      },
-      {
-        equipmentId: line.channels[1].equipmentId
-      }
-    ]
-  ];
+  return result;
 }
 
 function finishedWrite(error, response) {
