@@ -4,6 +4,7 @@ A service application for collecting utility usage data.
 [![GitHub license][license-img]][license-url]
 
 [![GitHub issues][github-issues-img]][github-issues-url]
+[![GitHub watchers][github-watchers-img]][github-watchers-url]
 [![GitHub forks][github-forks-img]][github-forks-url]
 [![GitHub stars][github-stars-img]][github-stars-url]
 
@@ -32,6 +33,8 @@ Please note that the connection config is still hard coded:
 [github-forks-url]: https://github.com/smerik/utility-usage-collector/network
 [github-stars-img]: https://img.shields.io/github/stars/smerik/utility-usage-collector.svg?style=flat-square
 [github-stars-url]: https://github.com/smerik/utility-usage-collector/stargazers
+[github-watchers-img]: https://img.shields.io/github/watchers/smerik/utility-usage-collector.svg?style=flat-square
+[github-watchers-url]: https://github.com/smerik/utility-usage-collector/watchers
 [license-img]: https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square
 [license-url]: https://raw.githubusercontent.com/smerik/utility-usage-collector/master/LICENSE
 [npm-dependencies-img]: https://david-dm.org/smerik/utility-usage-collector.svg?style=flat-square
