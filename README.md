@@ -1,6 +1,8 @@
 # Utility Usage Collector
 A service application for collecting utility usage data.
 
+[![GitHub license](https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square)](https://raw.githubusercontent.com/smerik/utility-usage-collector/master/LICENSE)
+
 ## Work in progress
 At this moment the application is working properly with the DSMR2.2+ generation of the Landis+Gyr E350 meter.
 Support for other DSMR versions and meters will follow some day.
