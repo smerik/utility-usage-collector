@@ -1,11 +1,11 @@
 # Utility Usage Collector
 A service application for collecting utility usage data.
 
-[![GitHub license](https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square)](https://raw.githubusercontent.com/smerik/utility-usage-collector/master/LICENSE)
+[![GitHub license][license-img]][license-url]
 
-[![GitHub issues](https://img.shields.io/github/issues/smerik/utility-usage-collector.svg?style=flat-square)](https://github.com/smerik/utility-usage-collector/issues)
-[![GitHub forks](https://img.shields.io/github/forks/smerik/utility-usage-collector.svg?style=flat-square)](https://github.com/smerik/utility-usage-collector/network)
-[![GitHub stars](https://img.shields.io/github/stars/smerik/utility-usage-collector.svg?style=flat-square)](https://github.com/smerik/utility-usage-collector/stargazers)
+[![GitHub issues][github-issues-img]][github-issues-url]
+[![GitHub forks][github-forks-img]][github-forks-url]
+[![GitHub stars][github-stars-img]][github-stars-url]
 
 ## Work in progress
 At this moment the application is working properly with the DSMR2.2+ generation of the Landis+Gyr E350 meter.
@@ -21,3 +21,12 @@ Please note that the connection config is still hard coded:
 - Default protocol is used: `http`
 - Database is named `utility_usage_db` & should be created manually
 - No credentials are used
+
+[github-issues-img]: https://img.shields.io/github/issues/smerik/utility-usage-collector.svg?style=flat-square
+[github-issues-url]: https://github.com/smerik/utility-usage-collector/issues
+[github-forks-img]: https://img.shields.io/github/forks/smerik/utility-usage-collector.svg?style=flat-square
+[github-forks-url]: https://github.com/smerik/utility-usage-collector/network
+[github-stars-img]: https://img.shields.io/github/stars/smerik/utility-usage-collector.svg?style=flat-square
+[github-stars-url]: https://github.com/smerik/utility-usage-collector/stargazers
+[license-img]: https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square
+[license-url]: https://raw.githubusercontent.com/smerik/utility-usage-collector/master/LICENSE
