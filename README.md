@@ -5,8 +5,8 @@ A service application for collecting utility usage data.
 
 [![GitHub issues][github-issues-img]][github-issues-url]
 [![GitHub watchers][github-watchers-img]][github-watchers-url]
-[![GitHub forks][github-forks-img]][github-forks-url]
 [![GitHub stars][github-stars-img]][github-stars-url]
+[![GitHub forks][github-forks-img]][github-forks-url]
 
 [![npm version][npm-version-img]][npm-version-url]
 [![Dependency Status][npm-dependencies-img]][npm-dependencies-url]
