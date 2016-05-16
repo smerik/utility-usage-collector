@@ -7,6 +7,10 @@ A service application for collecting utility usage data.
 [![GitHub forks][github-forks-img]][github-forks-url]
 [![GitHub stars][github-stars-img]][github-stars-url]
 
+[![npm version][npm-version-img]][npm-version-url]
+[![Dependency Status][npm-dependencies-img]][npm-dependencies-url]
+[![devDependency Status][npm-dev-dependencies-img]][npm-dev-dependencies-url]
+
 ## Work in progress
 At this moment the application is working properly with the DSMR2.2+ generation of the Landis+Gyr E350 meter.
 Support for other DSMR versions and meters will follow some day.
@@ -30,3 +34,9 @@ Please note that the connection config is still hard coded:
 [github-stars-url]: https://github.com/smerik/utility-usage-collector/stargazers
 [license-img]: https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square
 [license-url]: https://raw.githubusercontent.com/smerik/utility-usage-collector/master/LICENSE
+[npm-dependencies-img]: https://david-dm.org/smerik/utility-usage-collector.svg?style=flat-square
+[npm-dependencies-url]: https://david-dm.org/smerik/utility-usage-collector
+[npm-dev-dependencies-img]: https://david-dm.org/smerik/utility-usage-collector/dev-status.svg?style=flat-square
+[npm-dev-dependencies-url]: https://david-dm.org/smerik/utility-usage-collector#info=devDependencies
+[npm-version-img]: https://img.shields.io/npm/v/utility-usage-collector.svg?style=flat-square
+[npm-version-url]: https://www.npmjs.com/package/utility-usage-collector
