@@ -1,8 +1,8 @@
 {
 
-  "name": "utility-usage-monitor",
+  "name": "utility-usage-collector",
   "version": "0.0.0",
-  "description": "A utility usage monitoring application",
+  "description": "A utility usage collector application",
   "keywords": [
     "awareness",
     "charts",
@@ -10,12 +10,15 @@
     "electricity",
     "energy",
     "gas",
+    "collector",
     "dashboard",
     "datalogger",
     "datalogging",
     "domotic",
     "domotics",
     "home-automation",
+    "logger",
+    "logging",
     "live",
     "measurement",
     "meter",
@@ -27,7 +30,6 @@
     "power",
     "real-time",
     "smart",
-    "statistics",
     "usage",
     "utility",
     "water"
@@ -39,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smerik/utility-usage-monitor"
+    "url": "https://github.com/smerik/utility-usage-collector"
   },
   "bugs": {
-    "url": "https://github.com/smerik/utility-usage-monitor/issues"
+    "url": "https://github.com/smerik/utility-usage-collector/issues"
   },
   "main": "index.js",
   "dependencies": {

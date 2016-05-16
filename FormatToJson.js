@@ -1,6 +1,6 @@
 /*
-Utility Usage Monitor - A utility usage monitoring application.
-Copyright (C) 2015  Erik van der Kolk
+Utility Usage Collector - A utility usage data collecting application.
+Copyright (C) 2015-2016  Erik van der Kolk
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

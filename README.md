@@ -1,10 +1,9 @@
-# Utility Usage Monitor
-An application for logging and monitoring the utility usage.
+# Utility Usage Collector
+A service application for collecting utility usage data.
 
 ## Work in progress
-At this moment the application is only able to log the received data to a database.
-
-The frontend for showing the statistics will be implemented later.
+At this moment the application is working properly with the DSMR2.2+ generation of the Landis+Gyr E350 meter.
+Support for other DSMR versions and meters will follow some day.
 
 ### Database
 The application makes use of InfluxDB for storing the received data.
