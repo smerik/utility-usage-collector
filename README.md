@@ -27,10 +27,10 @@ Please note that the connection config is still hard coded:
 - Database is named `utility_usage_db` & should be created manually
 - No credentials are used
 
-[github-issues-img]: https://img.shields.io/github/issues/smerik/utility-usage-collector.svg?style=flat-square
-[github-issues-url]: https://github.com/smerik/utility-usage-collector/issues
 [github-forks-img]: https://img.shields.io/github/forks/smerik/utility-usage-collector.svg?style=flat-square
 [github-forks-url]: https://github.com/smerik/utility-usage-collector/network
+[github-issues-img]: https://img.shields.io/github/issues/smerik/utility-usage-collector.svg?style=flat-square
+[github-issues-url]: https://github.com/smerik/utility-usage-collector/issues
 [github-stars-img]: https://img.shields.io/github/stars/smerik/utility-usage-collector.svg?style=flat-square
 [github-stars-url]: https://github.com/smerik/utility-usage-collector/stargazers
 [github-watchers-img]: https://img.shields.io/github/watchers/smerik/utility-usage-collector.svg?style=flat-square
